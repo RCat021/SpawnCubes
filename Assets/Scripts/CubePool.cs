@@ -25,7 +25,7 @@ public class CubePool : MonoBehaviour
 
     private void ActivateCube(CubeView cube)
     {
-        cube.Release += ReleaseCube;
+        cube.Released += ReleaseCube;
 
         cube.GetComponent<Rigidbody>().velocity = Vector3.zero;
         cube.gameObject.SetActive(true);
@@ -43,7 +43,7 @@ public class CubePool : MonoBehaviour
 
     public void ReleaseCube(CubeView cube)
     {
-        cube.Release -= ReleaseCube;
+        cube.Released -= ReleaseCube;
         _pool.Release(cube);
     }
 

@@ -4,11 +4,11 @@ using UnityEngine;
 public class CubeSpawn : MonoBehaviour
 {
     [SerializeField] private CubePool _pool;
-    [SerializeField] public Transform _spawnPoint;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeField, Min(0)] private float _radiusSpawnPosition = 5f;
     [SerializeField, Min(0)] private float _timeSpawnCube = 0.4f;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(Spawn());
     }
@@ -28,14 +28,15 @@ public class CubeSpawn : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-        bool spawned = true;
+        bool spawned = enabled;
+        var time = new WaitForSeconds(_timeSpawnCube);
 
         while (spawned)
         {
             var cube = _pool.GetPoolObject();
             cube.transform.position = GetSpawnPosition();
 
-            yield return new WaitForSeconds(_timeSpawnCube);
+            yield return time;
         }
     }
 }

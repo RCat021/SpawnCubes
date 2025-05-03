@@ -11,9 +11,9 @@ public class CubeView : MonoBehaviour
     private Renderer _renderer;
     private bool _isChangedColor = false;
 
-    public event Action<CubeView> Release;
+    public event Action<CubeView> Released;
 
-    void Awake()
+    private void Awake()
     {
         _renderer = GetComponent<Renderer>();
     }
@@ -38,6 +38,6 @@ public class CubeView : MonoBehaviour
 
         yield return new WaitForSeconds(timeDestroy);
 
-        Release?.Invoke(this);
+        Released?.Invoke(this);
     }
 }
